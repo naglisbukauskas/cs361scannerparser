@@ -87,7 +87,13 @@ public class TokenStream {
                     // look for <=, >=, ==, and !=
                     nextChar = readChar();
                     // TODO TO BE COMPLETED
-                    return t;
+                    if(nextChar == '=') {
+                        t.setValue(t.getValue() + nextChar);
+                        nextChar = readChar();
+                        return t;
+                    } else {
+                        t.setType("Other");
+                    }
                 case '|':
                     // Look for ||
                     nextChar = readChar();
@@ -197,6 +203,17 @@ public class TokenStream {
 
     private boolean isKeyword(String s) {
         // TODO TO BE COMPLETED
+        switch (s) {
+            case "boolean":
+            case "else":
+            case "if":
+            case "int":
+            case "main":
+            case "void":
+            case "while":
+                return true;
+        }
+
         return false;
     }
 
@@ -228,6 +245,18 @@ public class TokenStream {
     private boolean isOperator(char c) {
         // Checks for characters that start operators
         // TODO TO BE COMPLETED
+        switch (c) {
+            case '<':
+            case '>':
+            case '=':
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '!':
+            case '&':
+                return true;
+        }
         return false;
     }
 
