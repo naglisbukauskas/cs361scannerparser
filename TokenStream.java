@@ -57,14 +57,15 @@ public class TokenStream {
                 // skip rest of line - it's a comment.
                 // TODO TO BE COMPLETED
                 // look for <cr>, <lf>, <ff>
-		while(!isEndOfLine(nextChar)) {
-		    nextChar = readChar();	
-		}
-		//The while loop does skip the comment, but without this next
-		//line of code, you still get a token printed but which doesn't
-		//contain any actual information
-		nextChar = readChar();
+                while(!isEndOfLine(nextChar)) {
+                    nextChar = readChar();
+                }
+                //The while loop does skip the comment, but without this next
+                //line of code, you still get a token printed but which doesn't
+                //contain any actual information
+                nextChar = readChar();
 
+                skipWhiteSpace();
             } else {
                 // A slash followed by anything else must be an operator.
                 t.setValue("/");
@@ -91,9 +92,9 @@ public class TokenStream {
                         t.setValue(t.getValue() + nextChar);
                         nextChar = readChar();
                         return t;
-                    } else {
-                        t.setType("Other");
                     }
+
+                    return t;
                 case '|':
                     // Look for ||
                     nextChar = readChar();
@@ -129,8 +130,8 @@ public class TokenStream {
         if (isSeparator(nextChar)) {
             t.setType("Separator");
             // TODO TO BE COMPLETED
-	    t.setValue(t.getValue() + nextChar);
-	    nextChar = readChar();
+            t.setValue(t.getValue() + nextChar);
+            nextChar = readChar();
             return t;
         }
 
@@ -238,7 +239,7 @@ public class TokenStream {
 
     private boolean isSeparator(char c) {
         // TODO TO BE COMPLETED
-	return (c == '(' | c == ')' | c == '{' | c == '}' | c == ':' | c == ',');
+        return (c == '(' | c == ')' | c == '{' | c == '}' | c == ':' | c == ',');
         // return false;
     }
 
@@ -255,6 +256,7 @@ public class TokenStream {
             case '/':
             case '!':
             case '&':
+            case '|':
                 return true;
         }
         return false;
@@ -266,8 +268,8 @@ public class TokenStream {
 
     private boolean isDigit(char c) {
         // TODO TO BE COMPLETED
-	// return (c == '1' | c == '2' | c == '3' | c == '4' | c == '5' | c == '6' | c == '7' | c == '8' | c == '9' | c == '0');
-	return (c >= '0' && c <= '9');
+        // return (c == '1' | c == '2' | c == '3' | c == '4' | c == '5' | c == '6' | c == '7' | c == '8' | c == '9' | c == '0');
+        return (c >= '0' && c <= '9');
         //return false;
     }
 
