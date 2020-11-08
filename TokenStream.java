@@ -91,9 +91,9 @@ public class TokenStream {
                         t.setValue(t.getValue() + nextChar);
                         nextChar = readChar();
                         return t;
-                    } else {
-                        t.setType("Other");
                     }
+
+                    return t;
                 case '|':
                     // Look for ||
                     nextChar = readChar();
