@@ -63,7 +63,10 @@ public class TokenStream {
 		//The while loop does skip the comment, but without this next
 		//line of code, you still get a token printed but which doesn't
 		//contain any actual information
-		nextChar = readChar();
+		//nextChar = readChar();
+		skipWhiteSpace();
+		//Without this line, you will get empty tokens for code that has a
+		// token/operator whatever and comments on the same line.
 
             } else {
                 // A slash followed by anything else must be an operator.
