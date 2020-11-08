@@ -57,6 +57,13 @@ public class TokenStream {
                 // skip rest of line - it's a comment.
                 // TODO TO BE COMPLETED
                 // look for <cr>, <lf>, <ff>
+		while(!isEndOfLine(nextChar)) {
+		    nextChar = readChar();	
+		}
+		//The while loop does skip the comment, but without this next
+		//line of code, you still get a token printed but which doesn't
+		//contain any actual information
+		nextChar = readChar();
 
             } else {
                 // A slash followed by anything else must be an operator.
@@ -116,6 +123,8 @@ public class TokenStream {
         if (isSeparator(nextChar)) {
             t.setType("Separator");
             // TODO TO BE COMPLETED
+	    t.setValue(t.getValue() + nextChar);
+	    nextChar = readChar();
             return t;
         }
 
@@ -212,7 +221,8 @@ public class TokenStream {
 
     private boolean isSeparator(char c) {
         // TODO TO BE COMPLETED
-        return false;
+	return (c == '(' | c == ')' | c == '{' | c == '}' | c == ':' | c == ',');
+        // return false;
     }
 
     private boolean isOperator(char c) {
