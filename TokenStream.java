@@ -266,20 +266,9 @@ public class TokenStream {
 
     private boolean isDigit(char c) {
         // TODO TO BE COMPLETED
-        switch (c) {
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9':
-            case '0':
-                return true;
-        }
-        return false;
+	// return (c == '1' | c == '2' | c == '3' | c == '4' | c == '5' | c == '6' | c == '7' | c == '8' | c == '9' | c == '0');
+	return (c >= '0' && c <= '9');
+        //return false;
     }
 
     public boolean isEndofFile() {
