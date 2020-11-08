@@ -67,7 +67,6 @@ public class TokenStream {
 		skipWhiteSpace();
 		//Without this line, you will get empty tokens for code that has a
 		// token/operator whatever and comments on the same line.
-
             } else {
                 // A slash followed by anything else must be an operator.
                 t.setValue("/");
@@ -132,8 +131,8 @@ public class TokenStream {
         if (isSeparator(nextChar)) {
             t.setType("Separator");
             // TODO TO BE COMPLETED
-	    t.setValue(t.getValue() + nextChar);
-	    nextChar = readChar();
+            t.setValue(t.getValue() + nextChar);
+            nextChar = readChar();
             return t;
         }
 
@@ -241,7 +240,7 @@ public class TokenStream {
 
     private boolean isSeparator(char c) {
         // TODO TO BE COMPLETED
-	return (c == '(' | c == ')' | c == '{' | c == '}' | c == ':' | c == ',');
+        return (c == '(' | c == ')' | c == '{' | c == '}' | c == ':' | c == ',');
         // return false;
     }
 
@@ -258,6 +257,7 @@ public class TokenStream {
             case '/':
             case '!':
             case '&':
+            case '|':
                 return true;
         }
         return false;
@@ -269,8 +269,8 @@ public class TokenStream {
 
     private boolean isDigit(char c) {
         // TODO TO BE COMPLETED
-	// return (c == '1' | c == '2' | c == '3' | c == '4' | c == '5' | c == '6' | c == '7' | c == '8' | c == '9' | c == '0');
-	return (c >= '0' && c <= '9');
+        // return (c == '1' | c == '2' | c == '3' | c == '4' | c == '5' | c == '6' | c == '7' | c == '8' | c == '9' | c == '0');
+        return (c >= '0' && c <= '9');
         //return false;
     }
 

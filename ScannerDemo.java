@@ -1,4 +1,3 @@
-
 /**
  * @author scharffc
  *
@@ -11,7 +10,7 @@ public class ScannerDemo {
     public static void main(String args[]) {
         TokenStream ts = new TokenStream(file1);
         System.out.println(file1);
-	Token tk = new Token();
+        Token tk = new Token();
         while (!ts.isEndofFile()) {
             // TO BE COMPLETED
             tk = ts.nextToken();
