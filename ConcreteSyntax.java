@@ -62,6 +62,7 @@ public class ConcreteSyntax {
         match("{");
         //Initialize Program instance variables.
         p.decpart = declarations();
+        //p.decpart does catch all 5 init variables in prog2, the infinite loop starts at p.body.
         p.body = statements();
         match("}");
         return p;
@@ -132,13 +133,17 @@ public class ConcreteSyntax {
             token = input.nextToken();
             s = statements();
             match("}");
-        } else if (token.getValue().equals("if")) // IfStatement
+        } else if (token.getValue().equals("if")) { // IfStatement
+            System.out.println("If statement");
             s = ifStatement();
-        else if (token.getValue().equals("while")) {
+        } else if (token.getValue().equals("while")) {
             // WhileStatement
-            // TODO TO BE COMPLETED
+            System.out.println("While Statement");
+            s = whileStatement();
         } else if (token.getType().equals("Identifier")) { // Assignment
-            // TODO TO BE COMPLETED
+            //Infinite loop here
+            System.out.println("Assignment Statement");
+            s = assignment();
         } else
             throw new RuntimeException(SyntaxError("Statement"));
         return s;
@@ -147,8 +152,10 @@ public class ConcreteSyntax {
     private Block statements() {
         // Block --> '{' Statements '}'
         Block b = new Block();
+        //This is where the infinite loop happens
         while (!token.getValue().equals("}")) {
             b.blockmembers.addElement(statement());
+            //token = input.nextToken(); THE ITERATION NEEDS TO COME FROM INSIDE THE STATEMENT FUNCTION
         }
         return b;
     }
@@ -158,6 +165,13 @@ public class ConcreteSyntax {
         Assignment a = new Assignment();
         if (token.getType().equals("Identifier")) {
             // TODO TO BE COMPLETED
+            a.target = new Variable();
+            //Assignments will always have a = sign inbetween the two values
+            token = input.nextToken();
+            match("=");
+            a.source = expression();
+            //Assignments will always end with a ;
+            match(";");
         } else
             throw new RuntimeException(SyntaxError("Identifier"));
         return a;
@@ -213,9 +227,18 @@ public class ConcreteSyntax {
         // Addition --> Term { [ + | - ] Term }*
         Binary b;
         Expression e;
+        //Operator o = null;
         e = term();
         while (token.getValue().equals("+") || token.getValue().equals("-")) {
             // TODO TO BE COMPLETED
+            b = new Binary();
+            /*o.val = token.getValue();
+            b.op = o.val*/
+            b.op = new Operator(token.getValue());
+            b.term1 = e;
+            token = input.nextToken();
+            b.term2 = e;
+            e = b;
         }
         return e;
     }
@@ -228,6 +251,10 @@ public class ConcreteSyntax {
         while (token.getValue().equals("*") || token.getValue().equals("/")) {
             b = new Binary();
             // TODO TO BE COMPLETED
+            b.op = new Operator(token.getValue());
+            b.term1 = e;
+            token = input.nextToken();
+            b.term1 = e;
             e = b;
         }
         return e;
@@ -279,6 +306,10 @@ public class ConcreteSyntax {
         // IfStatement --> if ( Expression ) Statement { else Statement }opt
         Conditional c = new Conditional();
         // TODO TO BE COMPLETED
+        //NO WAY THIS IS EVERYTHING.
+        c.test = expression();
+        c.thenbranch = statement();
+        //c.elsebranch = statement();
         return c;
     }
 
@@ -286,6 +317,8 @@ public class ConcreteSyntax {
         // WhileStatement --> while ( Expression ) Statement
         Loop l = new Loop();
         // TODO TO BE COMPLETED
+        l.test = expression();
+        l.body = statement();
         return l;
     }
 
