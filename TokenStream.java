@@ -243,7 +243,7 @@ public class TokenStream {
 
     private boolean isSeparator(char c) {
         // TODO TO BE COMPLETED
-        return (c == '(' | c == ')' | c == '{' | c == '}' | c == ':' | c == ',');
+        return (c == '(' | c == ')' | c == '{' | c == '}' | c == ':' | c == ',' | c == ';');
         // return false;
     }
 
