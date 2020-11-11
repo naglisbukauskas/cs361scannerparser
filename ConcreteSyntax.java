@@ -200,6 +200,13 @@ public class ConcreteSyntax {
         e = relation();
         while (token.getValue().equals("&&")) {
             b = new Binary();
+
+            b.term1 = e;
+            b.op = new Operator(token.getValue());
+            token = input.nextToken();
+
+            b.term2 = relation();
+
             // TODO TO BE COMPLETED
             e = b;
         }
@@ -217,6 +224,11 @@ public class ConcreteSyntax {
                 || token.getValue().equals("==")
                 || token.getValue().equals("<>")) {
             b = new Binary();
+
+            b.term1 = e;
+            b.op = new Operator(token.getValue());
+            token = input.nextToken();
+            b.term2 = addition();
             // TODO TO BE COMPLETED
             e = b;
         }
