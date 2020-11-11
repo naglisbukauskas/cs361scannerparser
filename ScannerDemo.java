@@ -5,7 +5,7 @@
 public class ScannerDemo {
 
     String Malik = "C:\\Users\\malik\\Documents\\.school-shit\\Fall 2020\\Lang\\HW 4\\cs361scannerparser\\prog1.jay";
-    static String Naglis = "E:\\TempWorkspace\\cs361scannerparser2\\prog1.jay";
+    static String Naglis = "E:\\TempWorkspace\\cs361scanner\\prog2.jay";
     String ProfScharff = "C:\\Users\\cscharff\\eclipse-workspace\\ScannerSolution\\src\\prog1.jay";
 
     private static String file1 = "C:\\Users\\malik\\Documents\\.school-shit\\Fall 2020\\Lang\\HW 4\\cs361scannerparser\\prog1.jay";
