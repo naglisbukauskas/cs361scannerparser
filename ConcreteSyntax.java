@@ -47,12 +47,23 @@ public class ConcreteSyntax {
 
     public Program program() {
         // Program --> void main ( ) '{' Declarations Statements '}'
-        String[] header = { "main", "(", ")" };
+        String[] header = {"void", "main", "(", ")"};
         Program p = new Program();
-        for (int i = 0; i < header.length; i++)
+        for (int i = 0; i < header.length; i++) {
             // bypass "void main ( )"
             match(header[i]);
+        }
         // TODO TO BE COMPLETED
+        //This seems like a little bit of a hack, but I had to add void to the
+        //header keyword above - I might have to look into this but I'm not sure
+        //If we're supposed to change Prof. Scharff's code.
+        //Main body of the code is held in the brackets after "void main()", so we need
+        //to match for those brackets.
+        match("{");
+        //Initialize Program instance variables.
+        p.decpart = declarations();
+        p.body = statements();
+        match("}");
         return p;
     }
 
